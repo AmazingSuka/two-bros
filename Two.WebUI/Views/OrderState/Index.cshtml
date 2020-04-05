@@ -1,8 +1,12 @@
 ﻿@model IEnumerable<StateLookupModel>
 
 @{ 
-    ViewData["Title"] = "Order`s States";
+    ViewData["Title"] = "Состояния заказов";
 }
+
+<div class="text-center mb-3">
+    <h1 class="display-4 text-light">Состояния заказов</h1>
+</div>
 
 <button id="order-state-create" class="btn btn-secondary float-right mb-3" onclick="createOrderState()">Создать</button>
 
