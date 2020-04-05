@@ -1,0 +1,25 @@
+﻿@model IEnumerable<OrderedItemLookupModel>
+
+<div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th>Operation ID</th>
+                    <th>Food ID</th>
+                    <th>Food Name</th>
+                    <th>Quantity</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <th>@item.OperationId</th>
+                    <th>@item.FoodId</th>
+                    <th>@item.FoodName</th>
+                    <th>@item.Quantity</th>
+                </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

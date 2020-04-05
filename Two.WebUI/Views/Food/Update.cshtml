@@ -1,0 +1,115 @@
+﻿@model UpdateFoodViewModel
+
+@{
+    ViewData["Title"] = $"Update {Model.Current.Name}";
+}
+
+
+<div class="text-center mb-3">
+    <h1 class="display-4 text-light">Изменение товара</h1>
+    <h2 class="display-4 text-light">[#@Model.Current.Id] - @Model.Current.Name</h2>
+</div>
+
+<form asp-action="Update" method="post" enctype="multipart/form-data" class="col-lg-10 ml-lg-auto mr-lg-auto">
+    <input type="hidden" asp-for="@Model.Command.Id" value="@Model.Current.Id" />
+    <div class="form-row">
+        <div class="form-group col-9">
+            <label asp-for="@Model.Command.Name">Имя</label>
+            <input asp-for="@Model.Command.Name" value="@Model.Current.Name" class="form-control" required pattern="[\w]{3,30}" />
+        </div>
+        <div class="form-group col-3">
+            <label asp-for="@Model.Command.Price">Цена</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">₽</div>
+                </div>
+                <input asp-for="@Model.Command.Price" value="@Model.Current.Price" class="form-control" required min="0.1" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Command.Description">Описание</label>
+        <textarea id="@Html.IdFor(x => x.Command.Description)"
+                  name="@Html.NameFor(x => x.Command.Description)"
+                  class="form-control" required="required" maxlength="200">@Model.Current.Description</textarea>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-lg-2 col-sm-4 col-6">
+            <label asp-for="@Model.Command.Weight">Вес</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">g</div>
+                </div>
+                <input asp-for="@Model.Command.Weight" value="@Model.Current.Weight" class="form-control" required min="1" />
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4 col-6">
+            <label asp-for="@Model.Command.Size">Размер</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">cm</div>
+                </div>
+                <input asp-for="@Model.Command.Size" value="@Model.Current.Size" class="form-control" required min="1" />
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4 col-6">
+            <label asp-for="@Model.Command.Protein">Белки</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">100 g.</div>
+                </div>
+                <input asp-for="@Model.Command.Protein" value="@Model.Current.Protein" class="form-control" required min="1" />
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4 col-6">
+            <label asp-for="@Model.Command.Fats">Жиры</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">100 g.</div>
+                </div>
+                <input asp-for="@Model.Command.Fats" value="@Model.Current.Fats" class="form-control" required min="1" />
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4 col-6">
+            <label asp-for="@Model.Command.Carbohydrates">Углеводы</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">100 g.</div>
+                </div>
+                <input asp-for="@Model.Command.Carbohydrates" value="@Model.Current.Carbohydrates" class="form-control" required min="1" />
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4 col-6">
+            <label asp-for="@Model.Command.Calories">Калории</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">k/cal</div>
+                </div>
+                <input asp-for="@Model.Command.Calories" value="@Model.Current.Calories" class="form-control" required min="1" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Command.TypeId">Категория в меню</label>
+        <select asp-for="@Model.Command.TypeId" class="form-control">
+            @foreach (var item in Model.FoodTypes)
+            {
+                if (item.Id == Model.Current.TypeId)
+                {
+                    <option value="@item.Id" selected>@item.Type</option>
+                }
+                else
+                {
+                    <option value="@item.Id">@item.Type</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <div class="custom-file">
+            <label class="custom-file-label">Файл с изображением</label>
+            <input class="custom-file-input" type="file" asp-for="@Model.Command.Image" accept="image/*" />
+        </div>
+    </div>
+    <input type="submit" class="btn btn-success ml-auto d-flex" value="Принять изменения" />
+</form>

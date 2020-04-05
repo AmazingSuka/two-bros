@@ -1,0 +1,26 @@
+﻿@model IEnumerable<StateLookupModel>
+
+@{ 
+    ViewData["Title"] = "Order`s States";
+}
+
+<button id="order-state-create" class="btn btn-secondary float-right mb-3" onclick="createOrderState()">Создать</button>
+
+<table id="order-state-table" class="table table-hover table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>State</th>
+        <th>Operations</th>
+    </tr>
+    @foreach (var state in Model)
+    {
+        <tr id="order-state-row-@state.Id">
+            <td id="order-state-primary-@state.Id">@state.Id</td>
+            <td id="order-state-@state.Id">@state.State</td>
+            <td id="order-state-control-@state.Id" class="operations">
+                <button id="update-button-@state.Id" class="btn btn-warning mr-2" onclick="updateOrderState(@state.Id)">Редактировать</button>
+                <button id="delete-button-@state.Id" class="btn btn-danger" onclick="deleteOrderState(@state.Id)">Удалить</button>
+            </td>
+        </tr>
+    }
+</table>

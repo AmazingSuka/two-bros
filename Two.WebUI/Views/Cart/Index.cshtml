@@ -1,0 +1,84 @@
+﻿@model IEnumerable<SelectedItemLookupModel>
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<div class="text-center mb-3">
+    <h1 class="display-4 text-light">Корзина</h1>
+</div>
+
+<div id="cart-container" class="d-flex flex-column flex-lg-row align-items-center align-items-lg-start">
+    <div id="order-container" class="col-10 col-sm-12 col-lg-8">
+        @foreach (var food in Model)
+        {
+            <!-- https://boxters.s3.eu-central-1.amazonaws.com/@food.ImagePath -->
+        <div class="card bg-main mb-2" id="food-card-@food.Id">
+            <div class="row no-gutters">
+                <div class="col-sm-4">
+                    <img class="card-img" src="~/img/food/default.jpg" alt="Card image">
+                </div>
+                <div class="col-sm-8">
+                    <div class="card-body pt-2 d-flex flex-column h-100 bg-second ml-sm-2 pb-2">
+                        <div class="card-title text-light mb-0 mb-xl-2">
+                            <h4 class="card-text">@food.Name</h4>
+                            <p class="card-text">
+                                <small class="text-muted">@food.Weight g / @food.Size cm</small>
+                            </p>
+                        </div>
+                        <p class="text-light">
+                            Lorem  Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem
+                        </p>
+                        <div class="row justify-content-end mt-2 mt-sm-auto align-items-center">
+                            <div class="input-group col-6 col-xl-4 mr-auto">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-secondary" id="food-remove-@food.Id" onclick="decrementQuantity(@food.Id)">
+                                        –
+                                    </button>
+                                </div>
+                                <input id="food-input-@food.Id" type="number" class="form-control text-center border-0" onchange="AddFood(@food.Id)" value="@food.Quantity" disabled />
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary" onclick="incrementQuantity(@food.Id)">
+                                        +
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="col-3 p-0 col-sm-2 offset-sm-2 text-light text-center"><span id="food-price-@food.Id">@food.Price</span>₽</p>
+                            <span class="col-3 p-0 col-sm-2 text-light text-center" id="fullprice-@food.Id">@food.FullPrice₽</span>
+                            <a class="delete-icon" onclick="removeFood(@food.Id)"><img src="~/img/close-white.svg" alt="Alternate Text" /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+    <div id="summary-info" class="col-10 col-sm-6 col-lg-4 card bg-main border-0">
+        <div class="card-body bg-second">
+            <table class="table table-borderless text-light">
+                <tr>
+                    <td>К оплате</td>
+                    <td id="total-price"></td>
+                </tr>
+            </table>
+            <div class="d-flex justify-content-end justify-content-sm-around">
+                <a class="btn btn-secondary text-light mr-1 mr-sm-0" asp-action="Index" asp-controller="Home">
+                    <span class="d-xl-none">
+                        В меню
+                    </span>
+                    <span class="d-none d-xl-block">
+                        Вернуться в меню
+                    </span>
+                </a>
+                @if (Model.Count() > 0)
+                {
+                    <a class=" btn btn-primary text-light" asp-action="Create" asp-controller="Order">Оформить заказ</a>
+                }
+                else
+                {
+                    <a class="btn btn-primary text-light" asp-action="Create" asp-controller="Order">Оформить заказ</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+﻿@model FoodLookupModel
+
+<!-- Card image https://boxters.s3.eu-central-1.amazonaws.com/@Model.ImagePath -->
+
+<div class="product col-12 col-sm-12 col-lg-10 d-flex">
+    <div class="d-flex position-relative col-5 pointer" onclick="GetFoodDetail(@Model.Id)">
+        <div class="photo-container">
+            <div class="photo-main">
+                <img src="~/img/food/default.jpg"
+                     alt="Card image">
+            </div>
+        </div>
+    </div>
+    <div class="product__info col-7">
+        @if (User.IsInRole(Roles.Administrator))
+        {
+            <div class="admin-buttons">
+                <button class="admin-btn" onclick="GetFoodDetail(@Model.Id)">
+                    <img src="~/img/file.svg" alt="Details Button" />
+                </button>
+                <a class="admin-btn" asp-action="Update" asp-controller="Food" asp-route-foodId="@Model.Id">
+                    <img src="~/img/edit.svg" alt="Alternate Text" />
+                </a>
+                <a class="admin-btn" asp-action="Delete" asp-controller="Food" asp-route-foodId="@Model.Id">
+                    <img src="~/img/close-red.svg" alt="Alternate Text" />
+                </a>
+            </div>
+        }
+        <div class="pointer" onclick="GetFoodDetail(@Model.Id)">
+            <div class="title">
+                <h1>@Model.Name</h1>
+                <span>@Model.Weight г. / @Model.Size см.</span>
+            </div>
+            <div class="price">
+                ₽ <span>@Model.Price</span>
+            </div>
+            <div class="description">
+                @Model.Description
+            </div>
+        </div>
+        <div class="control-panel">
+            <div class="control-buttons">
+                <button class="control qt-button" onclick="decrementFoodCount(@Model.Id)">
+                    -
+                </button>
+                <input id="food-input-@Model.Id" type="number" class="form-control control" value="0" />
+                <button class="control qt-button" onclick="incrementFoodCount(@Model.Id)">
+                    +
+                </button>
+            </div>
+            <button id="food-add-@Model.Id" class="btn btn-danger control pt-0 pb-0" onclick="AddFood(@Model.Id)">Добавить</button>
+        </div>
+    </div>
+    <!-- Container for modal window -->
+    <div id="foodModalContainer-@Model.Id"></div>
+</div>

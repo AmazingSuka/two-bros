@@ -1,0 +1,31 @@
+{
+  "name": "two-bros",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "gulp watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmazingSuka/two-gros.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AmazingSuka/2Bros/issues"
+  },
+  "homepage": "https://github.com/AmazingSuka/2Bros#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.12",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-clean-css": "^3.4.0",
+    "gulp-cli": "^2.2.0",
+    "gulp-group-css-media-queries": "^1.2.2",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.0",
+    "node-sass": "^4.13.1",
+    "smart-grid": "^2.1.2"
+  }
+}

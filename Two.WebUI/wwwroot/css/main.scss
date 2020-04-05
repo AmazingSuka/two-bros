@@ -1,0 +1,975 @@
+﻿@import 'smartgrid.scss';
+
+@include reset();
+
+$bg-color: #3f383f;
+$font-color: white;
+$bg-hover: #4f4f4f;
+$shadow: 0 0 28px rgba(0,0,0,0.25), 0 0 10px rgba(0,0,0,0.22);
+$nav-bg: #b14e4e;
+$nav-hover: #8b3e3e;
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.container {
+    @include wrapper();
+}
+
+body {
+    background-color: $bg-color;
+
+    * {
+        @include sm-block {
+            font-size: 14px;
+        }
+
+        @include md-block {
+            font-size: 16px;
+        }
+    }
+}
+
+header {
+    $mb: 30px;
+
+    @include sm(margin-bottom, $mb - 20px);
+    @include md(margin-bottom, $mb - 15px);
+    @include lg(margin-bottom, $mb - 10px);
+
+    margin-bottom: $mb;
+}
+
+.dropdown-menu {
+    background-color: $bg-color;
+    padding: 0;
+}
+
+.dropdown-item {
+    background-color: $bg-color;
+
+    &:hover {
+        background-color: $bg-hover;
+        border-radius: 5px;
+    }
+}
+
+.card {
+    background-color: $bg-color;
+    border-color: white;
+}
+
+.list-group-item {
+    background-color: $bg-color;
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.customer-info {
+    .list-group-item {
+        &:first-child {
+            background-color: $nav-bg;
+        }
+    }
+}
+
+ul {
+    background-color: $bg-color;
+
+    li {
+        background-color: $bg-color;
+    }
+}
+
+.alert-danger {
+    border: none;
+    background-color: #cd414e;
+}
+
+.qt-button {
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.font-small {
+    @include sm-block {
+        font-size: 8px;
+    }
+
+    @include md-block {
+    }
+
+    @include lg-block {
+        font-size: 10px;
+    }
+
+    font-size: 12px;
+}
+
+.font-header {
+    font-size: 3em;
+    margin-bottom: 30px;
+}
+
+input.button {
+    border: 1px solid white;
+    border-radius: 5px;
+
+    &:hover {
+        background: $bg-hover !important;
+    }
+}
+
+.toggler {
+    @include md-block {
+        display: inline-block;
+        margin-right: auto;
+    }
+
+    display: none;
+    width: 50px;
+    height: 35px;
+    padding: 0;
+    border: none;
+
+    img {
+        height: 100%;
+        width: 100%;
+    }
+}
+
+* {
+    border-color: white;
+    background-color: $bg-color;
+    color: white !important;
+}
+
+.button {
+    $transition-duration: .1s;
+    @include sm-block {
+        font-size: 12px;
+    }
+
+    font-size: 16px;
+    padding: 5px 15px;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    transition: all $transition-duration ease;
+
+    &:hover {
+        background: $bg-hover;
+        transition: all $transition-duration ease;
+    }
+}
+
+.button-hov {
+    $transition-duration: .1s;
+    border-radius: 5px;
+
+    &:hover {
+        background: $nav-hover;
+        transition: all $transition-duration ease;
+    }
+}
+
+.button.dropdown-toggle {
+    padding: 0.375rem 0.75rem;
+}
+
+.cart-button {
+    margin-left: 5px;
+    position: relative;
+    border: none;
+    width: 40px;
+
+    #cart-count {
+        position: absolute;
+        top: .9px;
+        font-size: 8px;
+        right: .8px;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hovered {
+        display: none;
+    }
+
+    &:hover {
+        img:not(.hovered) {
+            display: none;
+        }
+
+        .hovered {
+            display: block;
+        }
+    }
+}
+
+.controls {
+    margin-left: auto;
+    display: flex;
+    max-width: 250px;
+
+    input {
+        height: 100%;
+        text-align: center;
+    }
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+input:disabled + .slider {
+    opacity: .5;
+}
+
+input.error + .slider {
+    background-color: #ef3e3e;
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+nav {
+    $close-icon-width: 20px;
+    $radius: 30px;
+
+    @include md-block {
+        flex-direction: column;
+        border-radius: 0 0 $radius $radius;
+    }
+
+    border-radius: 0 0 $radius $radius;
+    padding: 10px 20px;
+    box-shadow: $shadow;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: $nav-bg;
+
+    * {
+        background-color: $nav-bg;
+    }
+
+    .dropdown-menu {
+        background-color: $nav-bg;
+    }
+
+    .dropdown-item {
+        background-color: $nav-bg;
+
+        &:hover {
+            border-radius: 0;
+            background-color: $nav-hover;
+        }
+    }
+
+    .button {
+        &:hover {
+            background-color: $nav-hover;
+        }
+    }
+
+    .brand {
+        margin-right: 1rem;
+    }
+
+    .menu {
+        display: flex;
+        align-items: center;
+
+        .nav-elem {
+            margin-right: .25rem;
+        }
+    }
+
+    .left-menu {
+        @include md-block {
+            display: none;
+        }
+
+        .close-icon {
+            width: $close-icon-width;
+            height: $close-icon-width;
+            display: none;
+        }
+
+        .account-item {
+            @include md-block {
+                display: block;
+            }
+
+            display: none;
+
+            &:nth-child(3) {
+                @include md-block {
+                    margin-bottom: 30px !important;
+                }
+            }
+        }
+    }
+
+    .right-menu {
+        @include md-block {
+            width: 100%;
+            margin-left: 0;
+        }
+
+        margin-left: auto;
+
+        .account-item {
+            @include md-block {
+                display: none;
+            }
+        }
+    }
+
+    .left-menu.responsive {
+        @include sm-block {
+            width: 60%;
+        }
+
+        @include md-block {
+            padding-top: 5vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+            width: 40%;
+            border-right: 1px solid white;
+        }
+
+        .nav-elem {
+            @include md-block {
+                width: 70%;
+            }
+
+            &:not(:last-child) {
+                margin-bottom: .2rem;
+            }
+        }
+
+        .close-icon {
+            @include md-block {
+                display: block;
+                position: absolute;
+                z-index: 1;
+                top: 7vh;
+                right: -$close-icon-width + -10px;
+            }
+        }
+    }
+}
+
+.control-btn {
+
+    display: flex;
+    min-width: 35px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.foods {
+    @include md-block {
+        justify-content: center;
+    }
+
+    margin-top: -10px;
+
+    .menu-empty {
+        display: flex;
+        justify-content: center;
+        font-size: 2em;
+        background-color: #524b4b;
+        border-radius: 10px;
+        padding: .3em;
+        width: 50%;
+        margin: 20px auto 0 auto;
+        text-align: center;
+    }
+}
+
+#order-container {
+    .card {
+        @include sm-block {
+            width: 100%;
+        }
+
+        @include md-block {
+        }
+
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 10px;
+        border-bottom: none;
+        border-left: none;
+        border-right: none;
+        padding-top: 10px;
+        border-radius: 0;
+
+        &:last-child {
+            padding-bottom: 10px;
+            border-bottom: 1px solid;
+        }
+
+        .card-img {
+            @include sm-block {
+                flex-basis: 35%;
+            }
+
+            flex-basis: 25%;
+        }
+
+        .card-body {
+            @include sm-block {
+            }
+
+            @include md-block {
+                flex-wrap: wrap;
+            }
+
+            @include lg-block {
+                padding: 5px 10px;
+            }
+
+            display: flex;
+            flex-direction: column;
+            padding: 0 15px;
+
+            .card-title {
+                display: flex;
+                margin-right: 10px;
+                margin-bottom: 10px;
+
+                .order-card-header {
+                    display: inline-block;
+
+                    h4 {
+                        @include sm-block {
+                            font-size: 16px;
+                        }
+                    }
+                }
+            }
+
+            .card-content {
+                margin-top: auto;
+                margin-left: auto;
+                display: flex;
+                align-items: center;
+
+                .controls {
+                    $size: 35px;
+                    $sm-size: 25px;
+                    margin-right: 10px;
+
+                    .button {
+                        border: 1px solid white;
+                    }
+
+                    .control-btn {
+                        padding: 0;
+
+                        &:not(:nth-child(2)) {
+                            @include sm-block {
+                                width: $sm-size;
+                                height: $sm-size;
+                                min-width: initial;
+                                padding: 2px;
+                            }
+
+                            width: $size;
+                            height: $size;
+                        }
+
+                        input {
+                            @include sm-block {
+                                height: $sm-size;
+                                width: 2.5rem;
+                                font-size: 10px;
+                            }
+
+                            height: $size;
+                            width: 3.5rem;
+                            margin-left: 5px;
+                            margin-right: 5px;
+                        }
+                    }
+                }
+
+                p {
+                    @include sm-block {
+                        font-size: 10px;
+                    }
+                }
+
+                .cart-price {
+                    @include sm(font-size, 10px);
+                    display: flex;
+                    align-items: center;
+                    height: 100%;
+                    padding: 0 .3em;
+
+                    span {
+                        @include sm(font-size, 10px);
+                    }
+                }
+
+                .basic-price {
+                }
+            }
+
+            .delete-icon {
+                $size: 10px;
+
+                cursor: pointer;
+                position: absolute;
+                display: inline-block;
+                width: $size;
+                height: $size;
+                top: 10px;
+                right: 5px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+    }
+}
+
+#cart-container {
+    @include md-block {
+        flex-direction: column-reverse;
+        margin: 0;
+    }
+
+    display: flex;
+    justify-content: space-between;
+
+    #order-container {
+        @include md-block {
+            width: 100%;
+        }
+
+        @include lg-block {
+            @include size(8);
+        }
+
+        @include size(8);
+    }
+
+    #summary-info {
+        @include sm-block {
+            margin-bottom: 15px;
+        }
+
+        @include md-block {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        @include lg-block {
+            @include size(4);
+        }
+
+        @include size(3.5);
+
+        .card {
+            padding: 5px;
+        }
+    }
+}
+
+
+/* ----- Variables ----- */
+$color-primary: #4c4c4c;
+$color-secondary: #a6a6a6;
+$color-highlight: #ff3f40;
+
+/* ----- Product Section ----- */
+.product {
+    transition: all .25s ease;
+
+    &:hover {
+        box-shadow: $shadow;
+        transition: all .25s ease;
+    }
+}
+
+.product {
+    @include sm-block {
+        margin: 1em 0; 
+        padding: .3em;
+    }
+    @include md(margin, 1.25em 0);
+    @include lg(margin, 1.5em 0);
+
+    padding: 1em;
+    width: 100%;
+    position: relative;
+    display: flex;
+    margin: auto;
+    margin: 2.5em 0;
+    border-radius: 6px;
+}
+
+/* ----- Photo Section ----- */
+.product__photo {
+    @include md(align-items, center);
+    display: flex;
+    position: relative;
+    flex-basis: 50%;
+}
+
+.photo-container {
+    @include md(height, fit-content);
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    box-shadow: 4px 4px 25px -2px rgba(0, 0, 0, 0.3);
+}
+
+.photo-main {
+    padding: 10% 2%;
+    border-radius: 6px;
+    background-color: #9be010;
+    background: radial-gradient(#a7a4a4, #ff3f40);
+    display: flex;
+    flex-direction: column;
+
+    img {
+        align-self: center;
+        margin-top: auto;
+        margin-bottom: auto;
+        max-width: 85%;
+        filter: saturate(120%) hue-rotate(10deg) drop-shadow(1px 20px 10px rgba(0, 0, 0, 0.3));
+    }
+}
+
+/* ----- Informations Section ----- */
+.product__info {
+    @include sm-block {
+        font-size: 8px;
+        position: initial;
+    }
+    @include md-block {
+        font-size: 11px;
+    }
+    @include lg-block {
+        font-size: 14px;
+    }
+
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    padding: 0.8em 0 .8em 2em;
+    flex-basis: 50%;
+    position: relative;
+}
+
+.admin-buttons {
+    @include sm-block {
+        flex-direction: row-reverse;
+        top: 3em;
+        right: initial;
+        left: 0;
+    }
+
+    font-size: 1em;
+    display: flex;
+    position: absolute;
+    top: 0.8em;
+    right: 0.8em;
+
+    button {
+        padding: 0;
+        border: none;
+    }
+
+    .admin-btn {
+        font-size: .7em;
+        width: 1.5em;
+
+        &:nth-child(even) {
+            margin-right: .5em;
+            margin-left: .5em;
+        }
+
+        &:hover {
+            
+        }
+    }
+}
+
+.title {
+    h1 {
+        @include sm(font-size, 1.3em);
+        margin-bottom: 0.1em;
+        color: $color-primary;
+        font-size: 1.6em;
+        font-weight: 900;
+        letter-spacing: .5px;
+    }
+
+    span {
+        @include sm(font-size, 0.5em);
+        font-size: 0.7em;
+        color: $color-secondary;
+    }
+}
+
+.price {
+    @include sm-block {
+        font-size: 1.5em; 
+    }
+
+    @include md-block {
+        margin: 0;
+    }
+    
+    margin: 0;
+    color: $color-highlight;
+    font-size: 1.2em;
+
+    span {
+        $fs-base: 2.9em;
+
+        @include sm-block {
+            font-size: $fs-base - 1.4em;
+        }
+
+        @include md-block {
+            font-size: $fs-base - 1em;
+        }
+
+        font-size: $fs-base;
+    }
+}
+
+.description {
+    overflow: hidden;
+    margin: 1em 0;
+    font-size: 1em;
+}
+
+.control-panel {
+    @include sm-block {
+        flex-wrap: wrap;
+        flex-direction: column;
+        width: 50%;
+    }
+
+    display: flex;
+    flex-direction: row;
+    font-size: 1em;
+
+    button {
+        @include md(border-radius, 3px);
+        font-size: .8em;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .control {
+        font-size: 1em;
+        height: 3em;
+    }
+
+    .control-buttons {
+        @include sm(margin-right, 0);
+        display: flex;
+        font-size: 1em;
+        margin-right: 1em;
+
+        button {
+            padding: 0;
+        }
+    }
+
+    .qt-button {
+        width: 3em;
+    }
+
+    input {
+        width: 5em;
+        height: auto;
+        text-align: center;
+        font-size: 1em;
+        margin: 0 .5em;
+    }
+
+    .buy--btn {
+        @include sm-block {
+            margin-top: 1em;
+        }
+    }
+}
+
+.control {
+    border: 1px solid white;
+}
+
+.buy--btn {
+    padding: 0 1.5em;
+    border: none;
+    border-radius: 7px;
+    font-size: 0.8em;
+    font-weight: 600;
+    letter-spacing: 1.3px;
+    color: #fff;
+    background-color: $color-highlight !important;
+    box-shadow: 2px 2px 25px -7px $color-primary;
+    cursor: pointer;
+
+    &:active {
+        transform: scale(0.97);
+    }
+}
+
+.cart-item {
+    display: flex;
+    height: 195px;
+}
+
+.item-header {
+    height: auto;
+    flex-basis: 25%;
+}
+
+.item-body {
+    flex-basis: 75%;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-content {
+    height: 140px;
+}
+
+.form-container {
+    @include sm(width, 85%);
+    @include md(width, 65%);
+    @include lg(width, 50%);
+    width: 30%;
+    margin: 0 auto;
+}
+
+.form-submit-r {
+    display: flex;
+    flex-direction: column;
+    input[type="submit"] {
+        margin-left: auto;
+    }
+}
+
+.edit-btn {
+    background-color: #e7ce36;
+    margin-right: 1em;
+
+    &:hover {
+        background-color: #c8b330;
+    }
+}
+
+.delete-btn {
+    background-color: #c42e2e;
+
+    &:hover {
+        background-color: #aa3c3c;
+    }
+}
+
+td.operations {
+    display: flex;
+}
+
+.bg-dark-danger {
+    background-color: $nav-bg;
+}
+
+.form-control {
+    background-color: $bg-color;
+
+    &:focus {
+        background-color: $bg-color;
+    }
+}
+
+.input-group-text {
+    background-color: #898989;
+}

@@ -1,8 +1,23 @@
-﻿@{
+﻿@model FoodListViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4 text-light">Меню</h1>
+</div>
+
+<div class="d-flex flex-column align-items-center">
+    @if (Model.FoodList.Count() != 0)
+    {
+        @foreach (var food in Model.FoodList)
+        {
+            <partial name="_FoodCardPartial" model="food" />
+        }
+    }
+    else
+    {
+        <span class="menu-empty">Товары выбранной категории не найдены</span>
+    }
 </div>

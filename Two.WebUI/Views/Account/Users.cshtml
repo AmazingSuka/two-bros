@@ -1,0 +1,59 @@
+﻿@model IEnumerable<UserLookupModel>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<div class="text-center mb-3">
+    <h1 class="display-4 text-light">Пользователи</h1>
+</div>
+
+<table class="table col-8 table-bordered table-hover ml-auto mr-auto" >
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Логин
+        </th>
+        <th>
+            Статус суперпользователя
+        </th>
+    </tr>
+    @foreach (UserLookupModel user in Model)
+    {
+        <tr>
+            <td>    
+                @user.Id
+            </td>
+            <td>
+                @user.Login
+            </td>
+            <td>
+                @if (User.Identity.Name == user.Login)
+                {
+                    <label class="switch">
+                        <input type="checkbox" checked disabled>
+                        <span class="slider round"></span>
+                    </label>
+                }
+                else
+                {
+                    <label class="switch">
+                        @if (user.IsSuperUser)
+                        {
+                            <input id="switch-role-@user.Id" type="checkbox" checked onclick="changeUserRole(@user.Id)">
+                        }
+                        else
+                        {
+                            <input id="switch-role-@user.Id" type="checkbox" onclick="changeUserRole(@user.Id)">
+                        }
+                        <span id="span-switch-@user.Id" class="slider round"></span>
+                    </label>
+                }
+            </td>
+        </tr>
+    }
+</table>
+
+

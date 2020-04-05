@@ -1,3 +1,21 @@
-﻿@using Two.WebUI
-@using Two.WebUI.Models
+﻿@using Boxters.WebUI
+@using Boxters.WebUI.Models
+@using Boxters.WebUI.Infrastructure
+
+@using Boxters.Application
+@using Boxters.Application.Infrastructure
+@using Boxters.Application.Foods
+@using Boxters.Application.Foods.Commands.CreateFood
+@using Boxters.Application.Foods.Commands.UpdateFood
+@using Boxters.Application.Foods.Queries.GetFoodsList
+@using Boxters.Application.Foods.Queries.GetFoodDetail
+@using Boxters.Application.Orders.Commands.CreateOrder
+@using Boxters.Application.Orders.Queries.GetOrders
+@using Boxters.Application.OrderStates.Queries.GetOrderStates
+@using Boxters.Application.FoodTypes.Queries.GetFoodTypes
+@using Boxters.Application.Accounts.Queries.GetUsersList
+@using Boxters.Application.ShoppingCart
+@using Boxters.Application.ShoppingCart.Queries.GetSelectedItems
+
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Boxters.WebUI

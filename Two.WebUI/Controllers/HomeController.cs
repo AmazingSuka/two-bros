@@ -4,23 +4,37 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Two.WebUI.Models;
+using Boxters.WebUI.Models;
+using Boxters.Application.Foods.Queries.GetFoodsList;
+using Boxters.Application.Foods.Queries.GetFoodDetail;
+using Boxters.Application.Foods.Commands.UpdateFood;
+using Boxters.Application.Foods.Commands.DeleteFood;
+using Boxters.Application.Foods.Queries.GetFoodTypes;
+using Boxters.Application.Foods.Queries.GetFoodsList.GetFoodListByCategory;
 
-namespace Two.WebUI.Controllers
+namespace Boxters.WebUI.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        [HttpGet]
+        public async Task<IActionResult> Index(string category)
         {
-            _logger = logger;
-        }
+            FoodListViewModel foodListViewModel = new FoodListViewModel
+            {
+                FoodList = await Mediator.Send(new GetFoodsListQuery()),
+                FoodTypes = await Mediator.Send(new GetFoodTypesQuery())
+            };
 
-        public IActionResult Index()
-        {
-            return View();
+            if (category != null)
+            {
+                foodListViewModel.FoodList = await Mediator.Send(new GetFoodListByCategoryQuery
+                {
+                    Items = foodListViewModel.FoodList,
+                    Category = category
+                });
+            }
+
+            return View(foodListViewModel);
         }
 
         public IActionResult Privacy()

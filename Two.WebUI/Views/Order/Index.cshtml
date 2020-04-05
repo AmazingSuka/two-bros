@@ -1,0 +1,94 @@
+﻿@model OrderViewModel
+
+@{
+    ViewData["Title"] = "Orders";
+}
+
+
+<div class="text-center mb-3">
+    <h1 class="display-4 text-light">Заказы</h1>
+</div>
+
+<div class="dropdown float-right pb-3" id="dropdown-states">
+    <a class="dropdown-toggle btn btn-secondary text-light" data-toggle="dropdown">Выбрать состояние заказа</a>
+    <div class="dropdown-menu" aria-labelledby="dropdown-states">
+        <a class="dropdown-item" asp-action="Index" asp-controller="Order">Все заказы</a>
+        <div class="dropdown-divider"></div>
+        @foreach (var state in Model.States)
+        {
+            <a class="dropdown-item" asp-action="Index" asp-controller="Order" asp-route-targetState="@state.State">@state.State</a>
+        }
+    </div>
+</div>
+
+@if (Model.Orders.Count() > 0)
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            @ViewData["TargetOrderState"]
+        </thead>
+        <tr>
+            <th>ID</th>
+            <th>Client Name</th>
+            <th>Phone Number</th>
+            <th>Address</th>
+            <th>Change State</th>
+        </tr>
+        @foreach (var order in Model.Orders)
+        {
+            <tr>
+                <td onclick="showOrHide(@order.Id)">@order.Id</td>
+                <td onclick="showOrHide(@order.Id)">@order.ClientName</td>
+                <td onclick="showOrHide(@order.Id)">@order.PhoneNumber</td>
+                <td onclick="showOrHide(@order.Id)">
+                    @order.Address
+                    <div class="modal fade" id="@order.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content">
+                                <table class="table table-bordered table-hover">
+                                    <tr>
+                                        <th>Operation ID</th>
+                                        <th>Food ID</th>
+                                        <th>Food Name</th>
+                                        <th>Quantity</th>
+                                    </tr>
+                                    @foreach (var item in order.OrderedItems)
+                                    {
+                                        <tr>
+                                            <td>@item.OperationId</td>
+                                            <td>@item.FoodId</td>
+                                            <td>@item.FoodName</td>
+                                            <td>@item.Quantity</td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="dropdown" id="dropdown-states-change">
+                        <a class="dropdown-toggle btn btn-outline-secondary w-100" data-toggle="dropdown">@order.OrderState.State</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown-states-change">
+                            @foreach (var state in Model.States)
+                            {
+                                if (order.OrderState.State != state.State)
+                                {
+                                    <a class="dropdown-item"
+                                       asp-action="ChangeState"
+                                       asp-controller="Order"
+                                       asp-route-orderId="@order.Id"
+                                       asp-route-targetState="@state.State">@state.State</a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>Заказов нет.</p>
+}

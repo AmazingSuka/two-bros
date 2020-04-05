@@ -1,0 +1,31 @@
+﻿@model IEnumerable<FoodTypeLookupModel>
+
+@{
+    ViewData["Title"] = "Food Types";
+}
+
+<div class="text-center mb-3">
+    <h1 class="display-4 text-light">Категории меню</h1>
+</div>
+
+<button id="order-state-create" class="btn btn-secondary float-right mb-3" onclick="createFoodType()">Создать категорию</button>
+
+<table id="order-state-table" class="table table-hover table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Type</th>
+        <th>Operations</th>
+    </tr>
+    @foreach (var foodType in Model)
+    {
+        <tr id="order-state-row-@foodType.Id">
+            <td id="order-state-primary-@foodType.Id">@foodType.Id</td>
+            <td id="order-state-@foodType.Id">@foodType.Type</td>
+            <td id="order-state-control-@foodType.Id" class="operations">
+                <button id="update-button-@foodType.Id" class="btn btn-warning mr-2" onclick="updateFoodType(@foodType.Id)">Редактировать</button>
+                <button id="delete-button-@foodType.Id" class="btn btn-danger" onclick="deleteFoodType(@foodType.Id)">Удалить</button>
+            </td>
+        </tr>
+    }
+</table>
+

@@ -1,0 +1,46 @@
+﻿@model SignUpViewModel
+
+@{
+    ViewData["Title"] = "Sign Up";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4 text-light">Регистрация</h1>
+</div>
+
+<form class="col-10 col-sm-8 col-md-6 col-lg-4 ml-auto mr-auto" asp-action="SignUp" method="post">
+    @if (Context.Session.Keys.Contains(SessionKeys.AccountAlreadyExistError))
+    {
+        <div class="alert alert-danger" role="alert">
+            Пользователь с данным именем уже зарегистрирован
+        </div>
+
+        Context.Session.Remove(SessionKeys.AccountAlreadyExistError);
+    }
+    @if (Context.Session.Keys.Contains(SessionKeys.PasswordsNotEqualError))
+    {
+        <div class="alert alert-danger" role="alert">
+            Пароли не совпадают.
+        </div>
+
+        Context.Session.Remove(SessionKeys.PasswordsNotEqualError);
+    }
+    <div class="form-group">
+        <label asp-for="@Model.Command.Login">Логин</label>
+        <input asp-for="@Model.Command.Login" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Command.Email">Email</label>
+        <input asp-for="@Model.Command.Email" type="email" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Command.Password">Пароль</label>
+        <input type="password" asp-for="@Model.Command.Password" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Command.RepeatedPassword">Повторите пароль</label>
+        <input type="password" asp-for="@Model.Command.RepeatedPassword" class="form-control" required />
+    </div>
+    <input type="submit" class="btn btn-primary d-flex ml-auto" value="Зарегистрироваться" />
+</form>

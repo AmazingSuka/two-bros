@@ -1,0 +1,103 @@
+﻿@model CreateFoodViewModel
+
+@{
+    ViewData["Title"] = "Create Food";
+}
+
+<div class="text-center mb-3">
+    <h1 class="display-4 text-light">Добавление в меню</h1>
+</div>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data" class="col-lg-10 ml-lg-auto mr-lg-auto">
+    <div class="form-row">
+        <div class="form-group col-9">
+            <label asp-for="@Model.Command.Name">Имя</label>
+            <input asp-for="@Model.Command.Name" class="form-control" required pattern="[\w]{3,30}" />
+        </div>
+        <div class="form-group col-3">
+            <label asp-for="@Model.Command.Price">Цена</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">₽</div>
+                </div>
+                <input asp-for="@Model.Command.Price" class="form-control" required min="0.1" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Command.Description">Описание</label>
+        <textarea asp-for="@Model.Command.Description" class="form-control" required maxlength="200"></textarea>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-lg-2 col-sm-4 col-6">
+            <label asp-for="@Model.Command.Weight">Вес</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">g</div>
+                </div>
+                <input asp-for="@Model.Command.Weight" class="form-control" required min="1" />
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4 col-6">
+            <label asp-for="@Model.Command.Size">Размер</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">cm</div>
+                </div>
+                <input asp-for="@Model.Command.Size" class="form-control" required min="1" />
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4 col-6">
+            <label asp-for="@Model.Command.Protein">Белки</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">100 g.</div>
+                </div>
+                <input asp-for="@Model.Command.Protein" class="form-control" required min="1" />
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4 col-6">
+            <label asp-for="@Model.Command.Fats">Жиры</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">100 g.</div>
+                </div>
+                <input asp-for="@Model.Command.Fats" class="form-control" required min="1" />
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4 col-6">
+            <label asp-for="@Model.Command.Carbohydrates">Углеводы</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">100 g.</div>
+                </div>
+                <input asp-for="@Model.Command.Carbohydrates" class="form-control" required min="1" />
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4 col-6">
+            <label asp-for="@Model.Command.Calories">Калории</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">k/cal</div>
+                </div>
+                <input asp-for="@Model.Command.Calories" class="form-control" required min="1" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Command.TypeId">Категория в меню</label>
+        <select asp-for="@Model.Command.TypeId" class="form-control">
+            @foreach (var item in Model.FoodTypes)
+            {
+                <option value="@item.Id">@item.Type</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <div class="custom-file">
+            <label class="custom-file-label">Файл с изображением</label>
+            <input class="custom-file-input" type="file" asp-for="@Model.Command.Image" accept="image/*" />
+        </div>
+    </div>
+    <input type="submit" class="btn btn-success ml-auto d-flex" value="Создать" />
+</form>

@@ -1,0 +1,30 @@
+﻿@model SignInViewModel
+
+@{
+    ViewData["Title"] = "Sign In";
+}
+
+<div class="text-center">
+    <h1 class="display-4 text-light">Авторизация</h1>
+</div>
+
+<form class="col-10 col-sm-8 col-md-6 col-lg-4 ml-auto mr-auto" asp-action="SignIn" method="post">
+    @if (Context.Session.Keys.Contains(SessionKeys.AuthError))
+    {
+        <div class="alert alert-danger" role="alert">
+            Неверный логин или пароль
+        </div>
+
+        Context.Session.Remove(SessionKeys.AuthError);
+    }
+
+    <div class="form-group">
+        <label asp-for="@Model.Login">Логин</label>
+        <input asp-for="@Model.Login" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Password">Пароль</label>
+        <input type="password" asp-for="@Model.Password" class="form-control" required />
+    </div>
+    <input type="submit" class="btn btn-primary d-flex ml-auto" value="Войти" />
+</form>
