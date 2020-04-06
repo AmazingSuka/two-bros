@@ -12,11 +12,10 @@
     <div id="order-container" class="col-10 col-sm-12 col-lg-8">
         @foreach (var food in Model)
         {
-            <!-- https://boxters.s3.eu-central-1.amazonaws.com/@food.ImagePath -->
         <div class="card bg-main mb-2" id="food-card-@food.Id">
             <div class="row no-gutters">
                 <div class="col-sm-4">
-                    <img class="card-img" src="~/img/food/default.jpg" alt="Card image">
+                    <img class="card-img" src="https://two-bros.s3.eu-central-1.amazonaws.com/@food.ImagePath" alt="Card image">
                 </div>
                 <div class="col-sm-8">
                     <div class="card-body pt-2 d-flex flex-column h-100 bg-second ml-sm-2 pb-2">

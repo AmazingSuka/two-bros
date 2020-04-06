@@ -1,13 +1,10 @@
 ﻿@model FoodLookupModel
 
-<!-- Card image https://boxters.s3.eu-central-1.amazonaws.com/@Model.ImagePath -->
-
 <div class="product col-12 col-sm-12 col-lg-10 d-flex">
     <div class="d-flex position-relative col-5 pointer" onclick="GetFoodDetail(@Model.Id)">
         <div class="photo-container">
             <div class="photo-main">
-                <img src="~/img/food/default.jpg"
-                     alt="Card image">
+                <img src="https://two-bros.s3.eu-central-1.amazonaws.com/@Model.ImagePath" alt="Card image">
             </div>
         </div>
     </div>
