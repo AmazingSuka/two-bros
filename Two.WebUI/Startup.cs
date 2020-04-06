@@ -46,6 +46,7 @@ namespace Boxters.WebUI
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option => {
                 option.LoginPath = "/Account/SignIn";
                 option.LogoutPath = "/Account/SignOut";
+                option.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
             });
             services.AddSession();
             services.AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
