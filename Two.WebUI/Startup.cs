@@ -42,7 +42,8 @@ namespace Boxters.WebUI
 
             services.AddDbContext<IBoxBoxContext, BoxBoxContext>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option => {
-                option.LoginPath = "Account/SignIn";
+                option.LoginPath = "/Account/SignIn";
+                option.LogoutPath = "/Account/SignOut";
                 option.Cookie.SecurePolicy = CookieSecurePolicy.Always;
             });
             services.AddSession();
