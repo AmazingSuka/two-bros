@@ -23,7 +23,9 @@ namespace Boxters.Application.Accounts.Queries.GetUsersList
             return Task.FromResult(
                 _context.Account.Select(
                     acc => new UserLookupModel(acc.Id, acc.Login, acc.IsSuperUser)
-                    ).AsEnumerable()
+                    )
+                    .OrderBy(x => x.IsSuperUser)
+                    .AsEnumerable()
                 );
         }
     }
