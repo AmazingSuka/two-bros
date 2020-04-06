@@ -15,7 +15,7 @@ namespace Boxters.Application.Infrastructure
         private const string awsAccessKeyId = "AKIA4567YJWRZDARZONO";
         private const string awsSecretAccessKey = "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";
         private static readonly RegionEndpoint region = RegionEndpoint.EUCentral1;
-        private const string bucketName = "boxters";
+        private const string bucketName = "two-bros";
 
         public AmazonS3() : base(awsAccessKeyId, awsSecretAccessKey, region)
         {
