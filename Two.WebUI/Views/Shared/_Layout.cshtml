@@ -21,6 +21,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-dark-danger justify-content-end fixed-top">
         <a class="navbar-brand" asp-controller="Home" asp-action="Index">
             <img src="~/img/logo.svg" alt="">
+            @User.Identity.IsAuthenticated.ToString()
         </a>
         <div class="ml-md-2 collapse navbar-collapse order-1 order-md-0" id="navbarNavDropdown">
             <ul class="navbar-nav justify-content-around">
