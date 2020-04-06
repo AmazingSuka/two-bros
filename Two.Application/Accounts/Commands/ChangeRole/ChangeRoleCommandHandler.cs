@@ -18,13 +18,13 @@ namespace Boxters.Application.Accounts.Commands.ChangeRole
             _context = context;
         }
 
-        public Task<Unit> Handle(ChangeRoleCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(ChangeRoleCommand request, CancellationToken cancellationToken)
         {
             Account account = _context.Account.Find(request.AccountId);
             account.IsSuperUser = !account.IsSuperUser;
-            _context.SaveChangesAsync(cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
 
-            return Unit.Task;
+            return Unit.Value;
         }
     }
 }

@@ -12,6 +12,7 @@ using Boxters.WebUI.Infrastructure;
 using Boxters.WebUI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Boxters.Application.Infrastructure;
 
 namespace Boxters.WebUI.Controllers
 {
@@ -25,10 +26,18 @@ namespace Boxters.WebUI.Controllers
         }
 
         [HttpPost]
-        [Authorize]
-        public async Task ChangeRole(int id)
+        [Authorize(Roles = Roles.Administrator)]
+        public async Task<IActionResult> ChangeRole(int id)
         {
-            await Mediator.Send(new ChangeRoleCommand(id));
+            try
+            {
+                await Mediator.Send(new ChangeRoleCommand(id));
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpGet]
