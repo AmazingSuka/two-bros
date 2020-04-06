@@ -37,11 +37,14 @@ namespace Boxters.Application.Infrastructure
 
         public async Task DeleteFoodImageAsync(string ImagePath)
         {
-            await DeleteObjectAsync(new DeleteObjectRequest
+            if (!ImagePath.Contains("default.jpg"))
             {
-                BucketName = bucketName,
-                Key = ImagePath
-            });
+                await DeleteObjectAsync(new DeleteObjectRequest
+                {
+                    BucketName = bucketName,
+                    Key = ImagePath
+                });
+            }
         }
 
         public string GetRandomFileNameWithPrefix(string filename, int maxRandom, int multiply)
