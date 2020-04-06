@@ -8,18 +8,20 @@
     <h1 class="display-4 text-light">Пользователи</h1>
 </div>
 
-<table class="table col-8 table-bordered table-hover ml-auto mr-auto" >
-    <tr>
-        <th>
-            ID
-        </th>
-        <th>
-            Логин
-        </th>
-        <th>
-            Статус суперпользователя
-        </th>
-    </tr>
+<table class="table col-8 table-hover table-striped ml-auto mr-auto" >
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Логин
+            </th>
+            <th>
+                Статус суперпользователя
+            </th>
+        </tr>
+    </thead>
     @foreach (UserLookupModel user in Model)
     {
         <tr>

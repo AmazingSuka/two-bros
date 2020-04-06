@@ -44,7 +44,7 @@ namespace Boxters.WebUI.Controllers
             if (targetState != null)
             {
                 result = await Mediator.Send(new GetOrdersByStateQuery { Orders = result, TargetState = targetState });
-                ViewData["TargetOrderState"] = $"{targetState} Orders.";
+                ViewData["TargetOrderState"] = $"{targetState}";
             }
 
             OrderViewModel model = new OrderViewModel { 
