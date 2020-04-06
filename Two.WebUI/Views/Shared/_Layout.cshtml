@@ -112,10 +112,6 @@
         </button>
     </nav>
     <div class="container">
-        @foreach (var key in Context.Session.Keys)
-        {
-            key.ToString();
-        }
         <partial name="_CookieConsentPartial" />
         <main role="main" class="">
             @RenderBody()
