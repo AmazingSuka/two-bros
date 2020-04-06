@@ -21,10 +21,10 @@ namespace Boxters.Application.Accounts.Queries.GetUsersList
         public Task<IEnumerable<UserLookupModel>> Handle(GetUsersListCommand request, CancellationToken cancellationToken)
         {
             return Task.FromResult(
-                _context.Account.Select(
-                    acc => new UserLookupModel(acc.Id, acc.Login, acc.IsSuperUser)
-                    )
-                    .OrderBy(x => x.IsSuperUser)
+                _context.Account
+                    .Select(acc => new UserLookupModel(acc.Id, acc.Login, acc.IsSuperUser))
+                    .ToList()
+                    .OrderByDescending(x => x.IsSuperUser)
                     .AsEnumerable()
                 );
         }
