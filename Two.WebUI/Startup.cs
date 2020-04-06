@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.CookiePolicy;
 using System.Reflection;
 using Boxters.Application.Interfaces;
 using Boxters.Persistance;
@@ -35,6 +36,7 @@ namespace Boxters.WebUI
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
+                options.HttpOnly = HttpOnlyPolicy.Always;
             });
 
             services.AddMediatR(typeof(CreateFoodCommandHandler).GetTypeInfo().Assembly);
