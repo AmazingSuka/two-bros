@@ -11,7 +11,7 @@
 <form class="col-10 col-sm-8 col-md-6 col-lg-4 ml-auto mr-auto" asp-action="SignIn" method="post">
     @if (Context.Session.Keys.Contains(SessionKeys.AuthError))
     {
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-danger mt-3" role="alert">
             Неверный логин или пароль
         </div>
 
@@ -19,9 +19,10 @@
     }
     else if (Context.Session.Keys.Contains(SessionKeys.SignUpSuccess))
     {
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success mt-3" role="alert">
             Регистрация прошла успешно
         </div>
+        Context.Session.Remove(SessionKeys.SignUpSuccess);
     }
 
     <div class="form-group">
