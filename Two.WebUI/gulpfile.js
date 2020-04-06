@@ -50,7 +50,7 @@ gulp.task('watch', function () {
         files: config.src,
         watch: true,
         proxy: {
-            target: "https://localhost:44307"
+            target: "http://localhost:60292"
         }
     });
 

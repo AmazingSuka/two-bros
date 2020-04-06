@@ -15,8 +15,4 @@
     <ProjectReference Include="..\Two.Persistance\Two.Persistance.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="wwwroot\.well-known\acme-challenge\QtubRRzD9WaDc17DEdtVCANmV4cEM6M8W31YU37VGS8" />
-  </ItemGroup>
-
 </Project>

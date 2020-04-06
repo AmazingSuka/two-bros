@@ -66,17 +66,23 @@ hr {
     cursor: pointer !important;
 }
 
-.table, label {
-    color: #fff;
+.table {
+    background-color: $bg-second;
 
     tr {
         &:hover {
             color: #fff;
-            th, td {
-                color: #fff;
-            }
+        }
+
+        th, td {
+            vertical-align: middle;
+            color: #fff;
         }
     }
+}
+
+.table, label {
+    color: #fff;
 }
 
 .navbar-brand {
