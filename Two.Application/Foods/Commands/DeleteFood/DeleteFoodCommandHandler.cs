@@ -36,7 +36,7 @@ namespace Boxters.Application.Foods.Commands.DeleteFood
 
             if (hasRelations)
             {
-                throw new DeleteFailureException(nameof(Food), request.Id, "Deletion entity has related of Sales");
+                throw new DeleteFailureException(nameof(Food), request.Id, "Target entity has related of Sales");
             }
 
             _context.Food.Remove(entity);
