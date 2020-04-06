@@ -52,7 +52,9 @@ namespace Boxters.WebUI.Controllers
             try
             {
                 await Mediator.Send(model.Command);
-                return RedirectToAction("Index", "Home");
+                HttpContext.Session.Set(SessionKeys.SignUpSuccess, Array.Empty<byte>());
+
+                return RedirectToAction("SignIn", "Account");
             }
             catch (AccountAlreadyExistException)
             {
@@ -61,6 +63,10 @@ namespace Boxters.WebUI.Controllers
             catch (PasswordsNotEqualException)
             {
                 HttpContext.Session.Set(SessionKeys.PasswordsNotEqualError, Array.Empty<byte>());
+            }
+            catch (Exception)
+            {
+                return BadRequest();
             }
 
             return RedirectToAction("SignUp");

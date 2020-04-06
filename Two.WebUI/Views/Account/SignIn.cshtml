@@ -17,6 +17,12 @@
 
         Context.Session.Remove(SessionKeys.AuthError);
     }
+    else if (Context.Session.Keys.Contains(SessionKeys.SignUpSuccess))
+    {
+        <div class="alert alert-success" role="alert">
+            Регистрация прошла успешно
+        </div>
+    }
 
     <div class="form-group">
         <label asp-for="@Model.Login">Логин</label>
