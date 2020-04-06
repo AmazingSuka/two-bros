@@ -16,6 +16,7 @@ using Boxters.Persistance;
 using Boxters.Application.ShoppingCart;
 using Boxters.Application.Infrastructure;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Boxters.WebUI.Infrastructure;
 
 namespace Boxters.WebUI
 {
@@ -74,9 +75,9 @@ namespace Boxters.WebUI
 
             app.Use(async (context, next) =>
             {
-                if (context.Session.Get("Cart") == null)
+                if (context.Session.Get(SessionKeys.Cart) == null)
                 {
-                    context.Session.Set("Cart", new Cart().ToByteArray());
+                    context.Session.Set(SessionKeys.Cart, new Cart().ToByteArray());
                 }
 
                 await next();

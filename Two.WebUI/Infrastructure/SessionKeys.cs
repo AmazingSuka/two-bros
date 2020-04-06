@@ -11,6 +11,5 @@ namespace Boxters.WebUI.Infrastructure
         public const string AuthError = "AuthError";
         public const string AccountAlreadyExistError = "AlreadyExistError";
         public const string PasswordsNotEqualError = "PasswordsNotEqualError";
-        public const string Privacy = "Privacy";
     }
 }
