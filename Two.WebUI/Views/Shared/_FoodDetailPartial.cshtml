@@ -17,13 +17,15 @@
                     </div>
                     <!-- Price & Category -->
                     <!-- Description -->
-                    <p class="card-text mb-3">@Model.Description</p>
+                    <p class="card-text mb-3 text-justify">@Model.Description</p>
                     <!-- Detai Information -->
-                    <table class="table table-sm table-hover">
-                        <tr>
-                            <th> На 100г. продукта: </th>
-                            <td></td>
-                        </tr>
+                    <table class="table table-sm table-hover table-striped col-8 col-lg-6 ml-auto mr-auto">
+                        <thead>
+                            <tr>
+                                <th> На 100г. продукта: </th>
+                                <th></th>
+                            </tr>
+                        </thead>
                         <tr>
                             <td>Калории</td>
                             <td>@Model.Calories</td>
