@@ -47,7 +47,7 @@ namespace Boxters.Application.ShoppingCart
             {
                 if (selectedItems.ContainsKey(foodId))
                 {
-                    selectedItems[foodId] = quantity;
+                    selectedItems[foodId] += quantity;
                 }
                 else
                 {
