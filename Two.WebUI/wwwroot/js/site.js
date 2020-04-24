@@ -53,8 +53,7 @@ function AddFood(id) {
     let inp = $(`#food-input-${id}`)
 
     if (inp.val() == 0) {
-        removeFood(id);
-        return;
+        return; 
     }
 
     $.ajax({
@@ -64,7 +63,6 @@ function AddFood(id) {
             q: inp.val()
         },
         success: function () {
-            console.log("confirm alert"); // Create alert!
             UpdateCartCounter()
             if ($('#total-price')) {
                 updateTotalPrice();
