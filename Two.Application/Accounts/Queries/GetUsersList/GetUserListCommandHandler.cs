@@ -22,9 +22,10 @@ namespace Boxters.Application.Accounts.Queries.GetUsersList
         {
             return Task.FromResult(
                 _context.Account
-                    .Select(acc => new UserLookupModel(acc.Id, acc.Login, acc.IsSuperUser))
+                    .Select(acc => new UserLookupModel(acc.Id, acc.Login, acc.IsSuperUser, acc.IsOwner))
                     .ToList()
-                    .OrderByDescending(x => x.IsSuperUser)
+                    .OrderByDescending(x => x.IsOwner)
+                    .ThenByDescending(x => x.IsSuperUser)
                     .AsEnumerable()
                 );
         }

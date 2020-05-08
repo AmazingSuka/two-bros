@@ -17,6 +17,7 @@ using Boxters.Application.ShoppingCart;
 using Boxters.Application.Infrastructure;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Boxters.WebUI.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace Boxters.WebUI
 {
@@ -43,6 +44,7 @@ namespace Boxters.WebUI
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehaviour<,>));
 
             services.AddDbContext<IBoxBoxContext, BoxBoxContext>();
+
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option => {
                 option.LoginPath = "/Account/SignIn";
                 option.LogoutPath = "/Account/SignOut";

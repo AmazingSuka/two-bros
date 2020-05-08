@@ -22,6 +22,8 @@ namespace Boxters.Persistance.Configurations
                 .HasMaxLength(200);
 
             builder.Property(e => e.Password).IsRequired();
+
+            builder.Property(e => e.IsOwner).IsRequired().HasDefaultValue(false);
         }
     }
 }

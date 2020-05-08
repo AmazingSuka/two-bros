@@ -1,4 +1,5 @@
-﻿using Boxters.Application.Interfaces;
+﻿using Boxters.Application.Exceptions;
+using Boxters.Application.Interfaces;
 using Boxters.Domain.Entities;
 using MediatR;
 using System;
@@ -21,13 +22,21 @@ namespace Boxters.Application.Accounts.Queries.SignInAccount
 
         public async Task<Unit> Handle(SignInAccountQuery request, CancellationToken cancellationToken)
         {
-            Account account = _context.Account.Single(x => x.Login == request.Login);
-            UserAccount userAccount = new UserAccount(new Account { Login = request.Login, Password = request.Password });
+            try
+            {
+                Account account = _context.Account.Single(x => x.Login == request.Login);
+                UserAccount userAccount = new UserAccount(new Account { Login = request.Login, Password = request.Password });
 
-            await userAccount.SignInAsync(account, request.HttpContext);
-            account.LastLogin = DateTime.Now;
-            await _context.SaveChangesAsync(cancellationToken);
-            return Unit.Value;
+                await userAccount.SignInAsync(account, request.HttpContext);
+                account.LastLogin = DateTime.Now;
+                await _context.SaveChangesAsync(cancellationToken);
+                return Unit.Value;
+            }
+            catch (Exception)
+            {
+                throw new InvalidPasswordException("The password is wrong");
+            }
+
         }
     }
 }

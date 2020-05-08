@@ -17,6 +17,7 @@ namespace Boxters.Domain.Entities
         public DateTime LastLogin { get; set; }
         public DateTime Created { get; set; }
         public bool IsSuperUser { get; set; }
+        public bool IsOwner { get; set; }
 
         public virtual ICollection<Order> Order { get; set; }
     }

@@ -13,6 +13,7 @@ using Boxters.WebUI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Boxters.Application.Infrastructure;
+using Two.Application.Exceptions;
 
 namespace Boxters.WebUI.Controllers
 {

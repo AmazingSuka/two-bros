@@ -39,12 +39,14 @@ namespace Boxters.Application.Accounts
                 Login = _account.Login,
                 Email = _account.Email,
                 IsSuperUser = false,
+                IsOwner = false,
                 Created = DateTime.Now
             };
 
             if (context.Account.Count() == 0)
             {
                 contextEntity.IsSuperUser = true;
+                contextEntity.IsOwner = true;
             }
 
             contextEntity.Password = passwordHasher.HashPassword(contextEntity, _account.Password);

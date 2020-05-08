@@ -10,11 +10,13 @@ namespace Boxters.Application.Accounts.Queries.GetUsersList
         public string Login { get; private set; }
         public bool IsSuperUser { get; private set; }
 
-        public UserLookupModel(int id, string login, bool isSuperUser)
+        public bool IsOwner { get; private set; }
+        public UserLookupModel(int id, string login, bool isSuperUser, bool isOwner)
         {
             Id = id;
             Login = login;
             IsSuperUser = isSuperUser;
+            IsOwner = isOwner;
         }
     }
 }

@@ -7,5 +7,6 @@ namespace Boxters.Application.Infrastructure
     public static class Roles
     {
         public const string Administrator = "SuperUser";
+        public const string Owner = "Owner";
     }
 }
