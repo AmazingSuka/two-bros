@@ -32,7 +32,6 @@
                 @user.Login
             </td>
             <td>
-                @user.IsOwner.ToString();
                 @if (User.Identity.Name == user.Login | user.IsOwner)
                 {
                     <label class="switch">
