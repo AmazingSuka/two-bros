@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Boxters.Application.Infrastructure;
@@ -20,6 +21,12 @@ namespace Boxters.WebUI.Controllers
 {
     public class OrderController : BaseController
     {
+        [HttpGet]
+        public IActionResult Search(int orderId)
+        {
+            return RedirectToAction("Detail", new { id = orderId });
+        }
+
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -67,7 +74,15 @@ namespace Boxters.WebUI.Controllers
         [Route("Order/Detail/{id:int}")]
         public async Task<IActionResult> Detail(int id)
         {
-            return View(await Mediator.Send(new GetOrderQuery { OrderId = id }));
+            try
+            {
+                return View(await Mediator.Send(new GetOrderQuery { OrderId = id }));
+            }
+            catch
+            {
+                HttpContext.Session.Set(SessionKeys.OrderNotFound, Array.Empty<byte>());
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }

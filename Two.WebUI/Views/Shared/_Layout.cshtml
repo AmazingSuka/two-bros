@@ -45,6 +45,7 @@
                 </li>
             </ul>
         </div>
+        <partial name="_OrderSearchField" />
         <ul class="navbar-nav flex-row">
             <li class="nav-item">
                 <a class="nav-link" asp-controller="Cart" asp-action="Index" role="group">
@@ -74,22 +75,22 @@
                             @User.Identity.Name
                         </a>
                         <div class="dropdown-menu position-absolute">
-                                <a class="dropdown-item"
-                                   asp-controller="Account"
-                                   asp-action="Users">Пользователи</a>
-                                <a class="dropdown-item"
-                                   asp-controller="FoodType"
-                                   asp-action="Index">Список категорий</a>
-                                <a class="dropdown-item"
-                                   asp-action="Index"
-                                   asp-controller="Order">Заказы</a>
-                                <a class="dropdown-item"
-                                   asp-controller="OrderState"
-                                   asp-action="Index">Состояния заказов</a>
-                                <a class="dropdown-item"
-                                   asp-action="Create"
-                                   asp-controller="Food">Добавить в меню</a>
-                            </div>
+                            <a class="dropdown-item"
+                               asp-controller="Account"
+                               asp-action="Users">Пользователи</a>
+                            <a class="dropdown-item"
+                               asp-controller="FoodType"
+                               asp-action="Index">Список категорий</a>
+                            <a class="dropdown-item"
+                               asp-action="Index"
+                               asp-controller="Order">Заказы</a>
+                            <a class="dropdown-item"
+                               asp-controller="OrderState"
+                               asp-action="Index">Состояния заказов</a>
+                            <a class="dropdown-item"
+                               asp-action="Create"
+                               asp-controller="Food">Добавить в меню</a>
+                        </div>
                     </li>
                 }
                 else
