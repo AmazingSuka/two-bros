@@ -37,6 +37,18 @@ namespace Boxters.WebUI.Controllers
             return View(foodListViewModel);
         }
 
+        [HttpGet]
+        public IActionResult Delivery()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult About()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
